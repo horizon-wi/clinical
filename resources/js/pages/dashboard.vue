@@ -1,10 +1,10 @@
 <template>
-    <h1>Laravel 9 vite with vue 3 - temporary page</h1>
+
+    <h1>Dashboard</h1>
+
+    <Header />
 
     <ul>
-        <li>
-            <Link :href="route('login')">Login</Link>
-        </li>
         <li>
             <Link :href="route('clients.index')">clients</Link>
         </li>
@@ -14,10 +14,11 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
+import Header from '@/components/header.vue';
 
 export default{
     components:{
-        Link
+        Link, Header
     }
 }
 </script>

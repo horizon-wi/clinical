@@ -1,5 +1,7 @@
 <template>
 
+    <Header />
+
     <h1>clients - index</h1>
 
     <a href="/clients/add/">add</a>
@@ -35,4 +37,14 @@ const props = defineProps({
     }
 });
 
+</script>
+
+<script>
+import Header from '@/components/header.vue';
+
+export default{
+    components:{
+        Header
+    },
+}
 </script>

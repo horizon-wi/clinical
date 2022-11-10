@@ -1,7 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 use Inertia\Inertia;
+
+// controllers for routes
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ClientsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,21 +23,35 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
     return Inertia::render('welcome');
 });
 
 
-// Route::get('/clients', function(){
-//     return view('clients');
-// });
 
-use App\Http\Controllers\ClientsController;
-Route::controller(ClientsController::class)->group(function(){
-    Route::get('/clients', [ClientsController::class, 'index'])->name('clients.index');
-    Route::get('/clients/add', [ClientsController::class, 'add'])->name('clients.add');
-    Route::get('/clients/view/{client_id}', [ClientsController::class, 'view'])->name('clients.view');
-    Route::get('/clients/edit/{client_id}', [ClientsController::class, 'edit'])->name('clients.edit');
-    Route::delete('/clients/delete/{client_id}', [ClientsController::class, 'delete'])->name('clients.delete');
-    Route::post('/clients/save/{client_id?}', [ClientsController::class, 'save'])->name('clients.save');
+
+
+// login
+Route::controller(LoginController::class)->group(function(){
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+
+
+// required login
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+    // clients
+    Route::controller(ClientsController::class)->group(function(){
+        Route::get('/clients','index')->name('clients.index');
+        Route::get('/clients/add', 'add')->name('clients.add');
+        Route::get('/clients/view/{client_id}', 'view')->name('clients.view');
+        Route::get('/clients/edit/{client_id}', 'edit')->name('clients.edit');
+        Route::delete('/clients/delete/{client_id}', 'delete')->name('clients.delete');
+        Route::post('/clients/save/{client_id?}', 'save')->name('clients.save');
+    });
+
 });
