@@ -7,7 +7,7 @@ use Inertia\Inertia;
 use Carbon\Carbon;
 use App\Models\Client;
 
-class ClientsController extends Controller{
+class ClientController extends Controller{
 
 
     public function index(){
