@@ -8,6 +8,9 @@
         <li>
             <Link :href="route('clients.index')">clients</Link>
         </li>
+        <li>
+            <Link :href="route('users.index')">users</Link>
+        </li>
     </ul>
 
 </template>

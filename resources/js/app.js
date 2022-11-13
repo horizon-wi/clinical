@@ -11,7 +11,7 @@ import { ZiggyVue } from 'ziggy-vue';
 import route from 'ziggy';
 
 import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/inertia-vue3';
+import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
  
 createInertiaApp({
@@ -21,6 +21,8 @@ createInertiaApp({
     createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(ZiggyVue)
+      .component("Link", Link)
+      .component("Head", Head)
       .mount(el)
   },
 });
